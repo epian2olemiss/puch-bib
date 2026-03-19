@@ -150,3 +150,26 @@ If the user provides only a DOI or a URL containing a DOI, use WebFetch on `http
 - **Forthcoming articles**: Use `(Forthcoming)` in place of the year if no year is available.
 - **Online-first / no volume/pages yet**: Omit volume/pages; include the DOI.
 - **Multiple works by same author in same year**: Append lowercase letters to the year: 2024a, 2024b — in both BibTeX keys and in-text citations.
+
+## Bibliography-to-Word Conversion
+
+This skill can also convert an entire bibliography into a Word document (`.docx`) formatted in Public Choice style.
+
+### How it works
+
+1. **If the input is a `.bib` file**: Run the bundled script directly:
+   ```bash
+   ~/.claude/skills/puch-bib/scripts/bib2docx.sh input.bib output.docx
+   ```
+   The script uses the `publicchoice.bst` to format the references via LaTeX, then converts to `.docx` via pandoc. The output file argument is optional — if omitted, it produces `input_publicchoice.docx` in the same directory.
+
+2. **If the input is NOT a `.bib` file** (e.g., plain text references, a Word document, a PDF bibliography, or pasted text):
+   - First, parse each reference and convert it to a BibTeX entry. Use WebSearch/WebFetch to look up missing metadata (DOIs, page numbers, etc.) when needed.
+   - Write all entries to a temporary `.bib` file.
+   - Then run the `bib2docx.sh` script on that `.bib` file.
+
+3. **Open the output** `.docx` file for the user when done.
+
+### Requirements
+
+The script requires `pdflatex`, `bibtex`, and `pandoc` to be installed.
