@@ -844,7 +844,7 @@ FUNCTION {calc.label}
       if$
     }
   if$
-  " "
+  ", "
   *
   year field.or.null purify$ #-1 #4 substring$
   *
