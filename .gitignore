@@ -1,0 +1,9 @@
+latex-package/*.aux
+latex-package/*.bbl
+latex-package/*.blg
+latex-package/*.log
+latex-package/*.out
+latex-package/*.pdf
+latex-package/*.fls
+latex-package/*.fdb_latexmk
+latex-package/*.synctex.gz

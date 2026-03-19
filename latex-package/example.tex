@@ -1,0 +1,36 @@
+\documentclass[12pt]{article}
+\usepackage{publicchoice}
+
+\title{Example: Public Choice Citation Style}
+\author{Test Author}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+
+This document demonstrates the Public Choice citation style.
+
+\subsection{In-text citations}
+
+Parenthetical citation: \pcite{Piano2018}.
+
+Textual citation: \tcite{Becker1971} argues that market power enables discrimination.
+
+Multiple citations: \pcite{Piano2018,Iannaccone1994,Becker2024}.
+
+Citation with page number: \citep[p.~350]{Piano2018}.
+
+\subsection{Various entry types}
+
+A journal article: \pcite{Piano2018}.
+A book: \pcite{Becker1971}.
+A book chapter: \pcite{Scanzoni1986}.
+A working paper: \pcite{Cinnirella2017}.
+Multiple authors: \pcite{Becker2024}.
+
+\bibliographystyle{publicchoice}
+\bibliography{example}
+
+\end{document}

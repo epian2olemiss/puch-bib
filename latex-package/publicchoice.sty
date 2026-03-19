@@ -1,0 +1,25 @@
+%%
+%% publicchoice.sty — LaTeX package for Public Choice journal formatting
+%%
+%% Usage: \usepackage{publicchoice}
+%%        \bibliographystyle{publicchoice}
+%%        \bibliography{yourbibfile}
+%%
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{publicchoice}[2026/03/19 Public Choice journal citation style]
+
+% Load natbib with author-year, round parentheses, semicolons between refs
+\RequirePackage[authoryear,round,semicolon,sort&compress]{natbib}
+
+% Load hyperref support for DOI links
+\RequirePackage{url}
+\RequirePackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+
+% Set natbib citation punctuation to match Public Choice style
+\setcitestyle{aysep={,}}   % comma between author and year: (Author, Year)
+
+% Convenience commands
+\newcommand{\pcite}[1]{\citep{#1}}          % parenthetical: (Author Year)
+\newcommand{\tcite}[1]{\citet{#1}}          % textual: Author (Year)
+
+\endinput
