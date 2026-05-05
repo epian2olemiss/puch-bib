@@ -21,7 +21,7 @@ If critical information is missing and cannot be inferred, ask the user before p
 
 ## Public Choice Citation Style Reference
 
-The style is based on the Paperpile Public Choice format (https://paperpile.com/s/public-choice-citation-style/). Key rules:
+Public Choice (Springer) uses a Chicago author-date / Springer Basic style. Key rules below — these match what the bundled `publicchoice.bst` produces.
 
 ### In-Text Citations
 
@@ -29,18 +29,23 @@ The style is based on the Paperpile Public Choice format (https://paperpile.com/
 - Two authors: (Author and Author Year) — e.g., (Stoeckle and Coffran 2013)
 - Three or more authors: (Author et al. Year) — e.g., (Cui et al. 2014)
 - Multiple references separated by semicolons: (Fan 2003; Stoeckle and Coffran 2013)
+- No comma between author and year.
 
 ### Reference List — Formatting Rules
 
-- **Author names**: Last, F. I. — use `&` before the final author
-- **Year**: In parentheses after the author block
-- **Article titles**: Sentence case, not italicized
-- **Journal names**: Italicized, title case
-- **Volume**: Italicized
-- **Issue number**: In parentheses, not italicized
-- **Pages**: Full range with en-dash (e.g., 752–753)
+- **Author names**:
+  - First author: `Last, First Middle` (full first names, not initials)
+  - Subsequent authors: `First Middle Last` (natural order)
+  - Use `and` (not `&`) before the final author
+  - Multiple authors separated by commas
+- **Year**: After the author block, **not in parentheses**, followed by a period — e.g., `... and Markus Reischmann. 2016.`
+- **Article titles**: Sentence case, not italicized, ended with a period
+- **Journal names**: Italicized, title case, no comma between journal and volume
+- **Volume**: Plain text (not italicized), directly after the journal name
+- **Issue number**: In parentheses with a leading space — e.g., `45 (1)`
+- **Pages**: Colon (no space before) between issue and pages; full range with en-dash — e.g., `45 (1): 39–56`
 - **DOI**: Include when available, as a URL: `https://doi.org/...`
-- **Punctuation**: Periods separate major elements
+- **Punctuation**: Periods separate major elements (authors / year / title / journal info / DOI)
 
 ### Entry Types and Templates
 
@@ -48,52 +53,57 @@ The style is based on the Paperpile Public Choice format (https://paperpile.com/
 
 **Word format:**
 ```
-Last, F. I., & Last, F. I. (Year). Article title in sentence case. Journal Name, Volume(Issue), StartPage–EndPage. https://doi.org/DOI
+Last, First Middle, First Middle Last, and First Middle Last. Year. Article title in sentence case. Journal Name Volume (Issue): StartPage–EndPage. https://doi.org/DOI
 ```
 
 **Example:**
 ```
-Stoeckle, M. Y., & Coffran, C. (2013). TreeParser-aided Klee diagrams display taxonomic clusters in DNA barcode and nuclear gene datasets. Scientific Reports, 3, 2635.
+Kauder, Björn, Niklas Potrafke, and Markus Reischmann. 2016. Do politicians reward core supporters? Evidence from a discretionary grant program. European Journal of Political Economy 45 (1): 39–56. https://doi.org/10.1016/j.ejpoleco.2016.09.003
+```
+
+For articles cited by article number rather than page range:
+```
+Rudolph, Lukas, and Arndt Leininger. 2021. Coattails and spillover-effects: Quasi-experimental evidence from concurrent executive and legislative elections. Electoral Studies 70: 102264. https://doi.org/10.1016/j.electstud.2020.102264
 ```
 
 #### Book
 
 **Word format:**
 ```
-Last, F. I. (Year). Book title in sentence case. Place: Publisher.
+Last, First Middle. Year. Book title in sentence case. Place: Publisher.
 ```
 
 **Example:**
 ```
-Bauldry, W. C. (2009). Introduction to real analysis. Hoboken, NJ: John Wiley & Sons, Inc.
+Bauldry, William C. 2009. Introduction to real analysis. Hoboken, NJ: John Wiley & Sons.
 ```
 
 #### Edited Book
 
 **Word format:**
 ```
-Last, F. I., & Last, F. I. (Eds.). (Year). Book title in sentence case (Edition). Place: Publisher.
+Last, First Middle, and First Middle Last, eds. Year. Book title in sentence case. Place: Publisher.
 ```
 
 #### Book Chapter
 
 **Word format:**
 ```
-Last, F. I. (Year). Chapter title in sentence case. In F. I. Last & F. I. Last (Eds.), Book title in sentence case (pp. StartPage–EndPage). Place: Publisher.
+Last, First Middle. Year. Chapter title in sentence case. In Book title in sentence case, ed. First Middle Last, StartPage–EndPage. Place: Publisher.
 ```
 
 #### Working Paper / Report
 
 **Word format:**
 ```
-Last, F. I. (Year). Title in sentence case (Working Paper No. XXXX). Institution/Series.
+Last, First Middle. Year. Title in sentence case. Working Paper No. XXXX. Institution/Series.
 ```
 
 #### Thesis / Dissertation
 
 **Word format:**
 ```
-Last, F. I. (Year). Title in sentence case (Doctoral dissertation/Master's thesis). Institution, Place.
+Last, First Middle. Year. Title in sentence case. Doctoral dissertation/Master's thesis, Institution, Place.
 ```
 
 ## Output Format
@@ -126,11 +136,11 @@ Example:
 
 ### Word Text
 
-Output the formatted reference as plain text (no markup), ready to paste into a Word document. Use an en-dash (–) for page ranges. Italics should be indicated with underscores for clarity: `_Journal Name_`, `_Volume_`.
+Output the formatted reference as plain text (no markup), ready to paste into a Word document. Use an en-dash (–) for page ranges. Italicize **only** the journal name or book title; use underscores for clarity: `_Journal Name_`. Volume number is plain.
 
 Example:
 ```
-Stoeckle, M. Y., & Coffran, C. (2013). TreeParser-aided Klee diagrams display taxonomic clusters in DNA barcode and nuclear gene datasets. _Scientific Reports_, _3_, 2635.
+Stoeckle, Mark Y., and Claud Coffran. 2013. TreeParser-aided Klee diagrams display taxonomic clusters in DNA barcode and nuclear gene datasets. _Scientific Reports_ 3 (1): 2635. https://doi.org/10.1038/srep02635
 ```
 
 ## Batch Mode

@@ -27,4 +27,35 @@ The skill outputs both:
 
 ## Citation Style
 
-Based on the [Public Choice citation style](https://paperpile.com/s/public-choice-citation-style/) from Paperpile.
+Public Choice (Springer) uses a Chicago author-date / Springer Basic style. The skill follows what the journal actually publishes:
+
+- Full first names (not initials)
+- `and` before final author (not `&`)
+- Year follows the author block, **not in parentheses** — e.g., `... and Markus Reischmann. 2016.`
+- Article titles in sentence case
+- Journal name italicized, title case
+- Volume in plain text (not italicized), with issue in parentheses: `45 (1)`
+- Colon between issue and pages, en-dashed range: `45 (1): 39–56`
+- DOI as URL: `https://doi.org/...`
+
+**Example:**
+
+```
+Kauder, Björn, Niklas Potrafke, and Markus Reischmann. 2016. Do politicians reward core supporters? Evidence from a discretionary grant program. European Journal of Political Economy 45 (1): 39–56. https://doi.org/10.1016/j.ejpoleco.2016.09.003
+```
+
+For online-only articles cited by article number rather than page range:
+
+```
+Rudolph, Lukas, and Arndt Leininger. 2021. Coattails and spillover-effects: Quasi-experimental evidence from concurrent executive and legislative elections. Electoral Studies 70: 102264. https://doi.org/10.1016/j.electstud.2020.102264
+```
+
+## Bulk Bibliography → Word
+
+To reformat an entire `.bib` file into a Public Choice–styled Word document:
+
+```bash
+~/.claude/skills/puch-bib/scripts/bib2docx.sh input.bib output.docx
+```
+
+The script uses the bundled `publicchoice.bst` BibTeX style to format the references via LaTeX, then converts to `.docx` via pandoc. Requires `pdflatex`, `bibtex`, and `pandoc`.
