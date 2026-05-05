@@ -1,10 +1,19 @@
 % BibTeX `publicchoice' bibliography style, adapted from `apalike' (v0.99a).
-% For the Public Choice journal (Springer).
+% For the Public Choice journal (Springer Basic / Chicago author-date).
+%
+% Output format for journal articles:
+%   Last, Full First, Full First Last, and Full First Last. Year.
+%   Article title in sentence case. \textit{Journal Name} Volume (Issue):
+%   StartPage--EndPage. \url{https://doi.org/DOI}
 %
 % Changes from apalike:
-%   - Uses \& instead of "and" between author names
-%   - Uses \textit{} instead of {\em }
-%   - Italicizes volume numbers in journal articles
+%   - First author: "Last, Full First" (full first names, not initials)
+%   - Subsequent authors: "Full First Last" (natural order)
+%   - Joins authors with "and" (not "\&")
+%   - Year follows authors with period, NOT in parentheses
+%   - Volume in plain text (not italicized)
+%   - Issue in parentheses with leading space: "Vol (Iss)"
+%   - Colon between issue and pages: "Vol (Iss): pages"
 %   - Adds doi and url field support
 %   - Adds format.doi output to article, book, incollection, etc.
 
@@ -87,8 +96,8 @@ FUNCTION {output.check}
 FUNCTION {output.year.check}
 { year empty$
     { "empty year in " cite$ * warning$ }
-    { write$
-      " (" year * extra.label * ")" *
+    { add.period$ " " *
+      year * extra.label *
       mid.sentence 'output.state :=
     }
   if$
@@ -173,24 +182,30 @@ FUNCTION {emphasize}
 
 INTEGERS { nameptr namesleft numnames }
 
-% Public Choice: uses \& instead of "and"
+% Public Choice / Chicago author-date:
+%   First author: "Last, Full First" (full given names)
+%   Subsequent: "Full First Last" (natural order)
+%   Joiner: "and" (not "\&")
 FUNCTION {format.names}
 { 's :=
   #1 'nameptr :=
   s num.names$ 'numnames :=
   numnames 'namesleft :=
     { namesleft #0 > }
-    { s nameptr "{vv~}{ll}{, jj}{, f.}" format.name$ 't :=
+    { nameptr #1 =
+        { s nameptr "{vv~}{ll}{, jj}{, ff}" format.name$ 't := }
+        { s nameptr "{ff~}{vv~}{ll}{, jj}" format.name$ 't := }
+      if$
       nameptr #1 >
         { namesleft #1 >
             { ", " * t * }
-            { numnames #2 >
-                { "," * }
-                'skip$
-              if$
-              t "others" =
-                { " et~al." * }
-                { " \& " * t * }
+            { t "others" =
+                { ", et~al." * }
+                { numnames #2 >
+                    { ", and " * t * }
+                    { " and " * t * }
+                  if$
+                }
               if$
             }
           if$
@@ -357,15 +372,15 @@ FUNCTION {format.pages}
   if$
 }
 
-% Public Choice: italicize volume, use comma before pages
+% Public Choice: plain volume, " (Iss): pages"
 FUNCTION {format.vol.num.pages}
 { volume empty$
     { "" }
-    { "\textit{" volume * "}" * }
+    { volume }
   if$
   number empty$
     'skip$
-    { "(" number * ")" * *
+    { " (" * number * ")" *
       volume empty$
         { "there's a number but no volume in " cite$ * warning$ }
         'skip$
@@ -376,7 +391,28 @@ FUNCTION {format.vol.num.pages}
     'skip$
     { duplicate$ empty$
         { pop$ format.pages }
-        { ", " * pages n.dashify * }
+        { ": " * pages n.dashify * }
+      if$
+    }
+  if$
+}
+
+% Combined journal info: "\textit{Journal} Vol (Iss): pages"
+FUNCTION {format.journal.info}
+{ journal empty$
+    { "" }
+    { "\textit{" journal * "}" *
+      volume empty$
+        'skip$
+        { " " * volume * }
+      if$
+      number empty$
+        'skip$
+        { " (" * number * ")" * }
+      if$
+      pages empty$
+        'skip$
+        { ": " * pages n.dashify * }
       if$
     }
   if$
@@ -476,8 +512,7 @@ FUNCTION {article}
   format.title "title" output.check
   new.block
   crossref missing$
-    { journal emphasize "journal" output.check
-      format.vol.num.pages output
+    { format.journal.info "journal" output.check
     }
     { format.article.crossref output.nonnull
       format.pages output
